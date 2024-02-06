@@ -25,10 +25,6 @@ import { PredefinedDataFilters } from './schemas/predefined-data.interfaces';
 export class PredefinedDataController {
   constructor(private readonly predefinedDataService: PredefinedDataService) {}
   
-  @Get('test')
-  test() {
-    return this.predefinedDataService.test();
-  }
 
   @UseGuards(JwtAuthGuard)
   @Permissions(Permission.PREDEFINED_DATA_CREATE)
@@ -38,8 +34,6 @@ export class PredefinedDataController {
   ): Promise<PredefinedData> {
     return this.predefinedDataService.create(createPredefinedDatumDto);
   }
-
-
 
   @Get()
   findAll(@Query() query : PredefinedDataFilters): Promise<PredefinedData[]> {

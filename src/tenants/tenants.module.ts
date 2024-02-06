@@ -4,7 +4,7 @@ import { TenantsService } from './tenants.service';
 import { TenantsController } from './tenants.controller';
 import { Tenant, TenantSchema } from './schemas/tenants.schema';
 import { TenantsRepository } from './tenants.repository';
-import { tenantConnectionProvider } from './tenants.provider';
+import { TenantConnectionProvider } from './tenants.provider';
 
 
 @Module({

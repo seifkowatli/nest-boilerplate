@@ -4,22 +4,17 @@ import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
 import { User, UserSchema } from './schemas/user.schema';
 import { UsersRepository } from './users.repository';
+import { TenantConnectionProvider } from 'src/tenants/tenants.provider';
+import { createModelProvider } from 'src/tenants/tenants-model.provider';
 
 @Module({
-  imports: [
-    MongooseModule.forFeatureAsync([
-      {
-        name: User.name,
-        useFactory: () => {
-          const schema = UserSchema;
-          schema.plugin(require('mongoose-autopopulate')); //TODO add this plugin globally
-          return schema;
-        },
-      },
-    ]),
-  ],
   controllers: [UsersController],
-  providers: [UsersService, UsersRepository],
+  providers: [
+    UsersService, 
+    UsersRepository,
+    TenantConnectionProvider,
+    createModelProvider(User.name, UserSchema)
+  ],
   exports: [UsersRepository, UsersService],
 })
 export class UsersModule {}
